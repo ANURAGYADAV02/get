@@ -1,33 +1,27 @@
-import { FaRegFileAlt } from "react-icons/fa"
-import { LuDownload } from "react-icons/lu";
-import { IoClose } from "react-icons/io5";
-import { motion } from "framer-motion";
+import React from 'react'
+import image1 from "../assets/image1.avif"
+import { GiChickenOven } from "react-icons/gi";
+import { LuLeafyGreen } from "react-icons/lu";
 
-function Card ({data,reference}) {
 
-  return ( 
-    <motion.div drag  dragConstraints={reference} whileDrag={{scale:1.2}} dragElastic={1.2} dragTransition={{bounceStiffness:100,bounceDamping:20}} className="relative card w-50 h-55 bg-zinc-900 text-white rounded-[50px] p-5 overflow-hidden">
-    <FaRegFileAlt/>
-    <p className="w-full tracking-tight leading-none p-5">{data.desc} </p>
-    
-    <div className="footer absolute w-full left-0 bg-zinc-900 bottom-0 rounded-md"> 
-        <div className="flex justify-between mb-10 pl-1 pr-3">
-        <h5>{data.fileSize} </h5>
-        <span  className="bg-zinc-700 rounded-full flex jstify-center w-5 h-5 ">
-        {data.close ? <IoClose/> : <LuDownload size="1em" color="#fff "/>}
-        </span>
+
+const Card = ({name,image,price,id, type}) => {
+  return (
+    <div className='w-[250px] h-[400px] bg-white mt-20 rounded-3xl m-2 flex flex-col justify-between  shadow-lg hover: border-2 border-green-400 transition-all '>
+        <div className=' hover:bg-green-300 cursor-pointer'> 
+        <img src={image} alt="" className=' p-5 rounded-3xl ' />
         </div>
-        {data.tag.isOpen ?(
-                    <div className={`tag w-full ${data.tag.tagColor==="blue" ? "bg-blue-600":"bg-green-600"} flex justify-center py-3`}>{data.tag.tagTitle}</div>
-
-        ) :null }
+      <div className='m-2'>
+        <b>{name}</b>
+      </div>
+      <div className='flex justify-between items-center m-2 text-green-500 hover:bg-green-300 cursor-pointer'>
+        <div>RS {price}/</div>
+        <div className='ml-20'>{type==="veg"?<LuLeafyGreen className='ml-'/>:<GiChickenOven/>}</div>
+        <div className=''>{type}</div>
+      </div>
+        <button className='w-[85%] m-3 rounded-md  p-2 bg-green-800 text-white hover:bg-green-300 cursor-pointer'>Add to dish</button> 
         
-       
     </div>
-    
-
-    </motion.div>
-
   )
 }
 
